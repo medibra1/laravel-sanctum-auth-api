@@ -22,7 +22,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'phone_number', // TODO add phone number
+        'phone_number', 
+        'status',
+        'type'
     ];
 
     /**
@@ -47,4 +49,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function isSupAdmin() {
+        return $this->type === 1;
+    }
+    public function isAdmin() {
+        return $this->type === 2;
+    }
+
+    public function isUser() {
+        return $this->type === 2;
+    }
+
 }

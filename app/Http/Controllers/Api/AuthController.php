@@ -53,8 +53,15 @@ class AuthController extends Controller
             }
             $user = Auth::user();
 
+            if($user->type == 1) {
+                $token = $user->createToken('Super Admin API Token', ['supadmin'])->plainTextToken;
+            } elseif($user->type == 2) {
+                $token = $user->createToken('Admin API Token', ['admin'], now()->addMonths(6))->plainTextToken;
+            } else {
+                $token = $user->createToken('User API Token', ['user'], now()->addMonths(3))->plainTextToken;
+            }
             // Create API Token
-            $token = $user->createToken('My API Token', ['*'], now()->addSecond(400))->plainTextToken;
+            // $token = $user->createToken('My API Token', ['*'], now()->addSecond(400))->plainTextToken;
             $authUser =  [
                 'user' => $user,
                 'token' => $token
