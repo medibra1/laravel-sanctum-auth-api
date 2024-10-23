@@ -1,0 +1,17 @@
+> php artisan install:apiphp artisan install:api
+
+use Laravel\Sanctum\HasApiTokens;
+class User extends Authenticatable
+{
+    use HasApiTokens, HasFactory, Notifiable;
+    ...
+}
+
+> php artisan make:controller Api/AuthController --api
+> php artisan make:request RegisterRequest
+
+in postam - headers > accept => application/json
+
+> php artisan make:class Helper/ResponseHelper
+
+> php artisan make:request LoginRequest
