@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CustomCheckAbilities;
 use App\Http\Middleware\ForceJsonRequestHeader;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -18,8 +19,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'abilities' => CheckAbilities::class,
-            'ability' => CheckForAnyAbility::class,
+            // 'abilities' => CheckAbilities::class,
+            // 'ability' => CheckForAnyAbility::class,
+            'custom_abilities' => CustomCheckAbilities::class,
         ]);
         $middleware->append(ForceJsonRequestHeader::class);
     })
